@@ -1,57 +1,47 @@
 import foodCardTpl from './templates/food-card.hbs';
 import cards from './menu.json';
-
+import {changeThemeDark, changeThemeLight,Theme} from './js/themes.js';
 import './sass/main.scss';
 
 
-
-const Theme = {
-  LIGHT: 'light-theme',
-  DARK: 'dark-theme',
-};
 const input = document.querySelector('.theme-switch__toggle');
 const menu = document.querySelector('.js-menu');
-console.log(menu)
-input.addEventListener('change', inputOnChange);
-showLocalStorageValue();
 document.body.classList.add(Theme.LIGHT);
+input.addEventListener('change', inputOnChange);
 
+showLocalStorageValue();
 
 function inputOnChange(e) {
 
     const inputValue = e.target.checked;
     localStorage.setItem('position', inputValue);
     if ( inputValue === true) {
-
-        document.body.classList.remove(Theme.LIGHT);
-         document.body.classList.add(Theme.DARK);
-    }
+       changeThemeDark();
+       }
 
     if (inputValue === false) {
-       
-        document.body.classList.remove(Theme.DARK);
-         document.body.classList.add(Theme.LIGHT);
-    }
-}
+       changeThemeLight();
+        }
+};
+
 
 
 function showLocalStorageValue() {
     const savedValue = localStorage.getItem('position');
 
     if (savedValue ==='true') {
-        document.body.classList.remove(Theme.LIGHT);
-        document.body.classList.add(Theme.DARK);
-    
-    
-    console.log( input.checked=true)
+        changeThemeDark();
+        input.checked=true;
     }
     if (savedValue === 'false') {
-        document.body.classList.remove(Theme.DARK);
-        document.body.classList.add(Theme.LIGHT);
-        console.log( input.checked=false)
+        changeThemeLight();
+        input.checked=false;
     }
 
-}
+    localStorage.removeItem('position');
+
+};
+
 const foodCardsMurkup=createFoodCards(cards)
 menu.insertAdjacentHTML('beforeend',foodCardsMurkup);
 
