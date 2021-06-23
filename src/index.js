@@ -8,7 +8,7 @@ const input = document.querySelector('.theme-switch__toggle');
 const menu = document.querySelector('.js-menu');
 document.body.classList.add(Theme.LIGHT);
 input.addEventListener('change', inputOnChange);
-
+ changeThemeLight();
 showLocalStorageValue();
 
 function inputOnChange(e) {
@@ -38,8 +38,8 @@ function showLocalStorageValue() {
         input.checked=false;
     }
 
-    localStorage.removeItem('position');
-
+    // localStorage.removeItem('position');
+     
 };
 
 const foodCardsMurkup=createFoodCards(cards)
