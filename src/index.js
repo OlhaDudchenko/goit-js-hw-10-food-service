@@ -1,4 +1,8 @@
+import foodCardTpl from './templates/food-card.hbs';
+import cards from './menu.json';
+
 import './sass/main.scss';
+
 
 
 const Theme = {
@@ -6,6 +10,8 @@ const Theme = {
   DARK: 'dark-theme',
 };
 const input = document.querySelector('.theme-switch__toggle');
+const menu = document.querySelector('.js-menu');
+console.log(menu)
 input.addEventListener('change', inputOnChange);
 showLocalStorageValue();
 document.body.classList.add(Theme.LIGHT);
@@ -40,9 +46,15 @@ function showLocalStorageValue() {
     console.log( input.checked=true)
     }
     if (savedValue === 'false') {
-         document.body.classList.remove(Theme.DARK);
+        document.body.classList.remove(Theme.DARK);
         document.body.classList.add(Theme.LIGHT);
         console.log( input.checked=false)
     }
 
+}
+const foodCardsMurkup=createFoodCards(cards)
+menu.insertAdjacentHTML('beforeend',foodCardsMurkup);
+
+function createFoodCards(cards) {
+    return cards.map(foodCardTpl).join('');
 }
